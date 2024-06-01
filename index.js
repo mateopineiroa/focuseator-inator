@@ -12,30 +12,87 @@
     // 'use strict'; I want to use window
     console.log('matscript loaded hehe');
 
-    function focusOnSearchInput() {
-        // const inputElements = document.querySelectorAll('input[type="text"], input[type="search"]');
-        const inputElements = document.querySelector('input');
-        const textAreaElement = document.querySelector('textarea');
-        const searchButton = document.getElementsByClassName('searchTab');
-
-        if (window.location.origin.includes("netflix")) {
-            return searchButton[0].click()
-        }
-        if (inputElements) {
-            return inputElements.focus();
-        }
-        if (textAreaElement) {
-            return textAreaElement.focus();
-        }
-
-
+    function focusElement(htmlElementRef) {
+        htmlElementRef.focus()
+        const length = htmlElementRef.value.length;
+        htmlElementRef.setSelectionRange(length, length);
     }
 
-    document.addEventListener('keydown', function (event) {
+    function focusOnSearchInput() {
+        const inputElement = document.querySelector('input');
+
+        if (window.location.href.includes("https://www.google.com/maps")) {
+            const searchInput = document.getElementById("searchboxinput");
+            focusElement(searchInput);
+            return
+        }
+        if (window.location.origin === "https://www.google.com") {
+            const googleSearchButton = document.querySelector('textarea[name=q]')
+            focusElement(googleSearchButton)
+            return
+        }
+        if (window.location.origin.includes("netflix")) {
+            const searchButton = document.getElementsByClassName('searchTab');
+            return searchButton[0].click()
+        }
+        if (inputElement) {
+            focusElement(inputElement)
+            return
+        }
+    }
+
+    function keydownEventHandler (event) {
         if (event.metaKey && event.key === 'k') {
             event.preventDefault();
             focusOnSearchInput();
         }
-    });
+    }
 
+    document.addEventListener('keydown', keydownEventHandler);
+    // This is magic to make maps work. The event listener must be on the canvas after you move the map
+    if (window.location.href.includes('https://www.google.com/maps')) {
+       setInterval(() => {
+           const mapsCanvas = document.querySelector('canvas')
+           if (mapsCanvas) {
+               mapsCanvas.addEventListener('keydown', keydownEventHandler);
+           }
+       }, 1000)// one second seems to be enough
+	}
 })();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
