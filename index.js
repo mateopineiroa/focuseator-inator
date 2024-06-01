@@ -26,7 +26,7 @@
 
     function focusOnSearchInput() {
         const inputElement = document.querySelector('input');
-        const queryInput = document.querySelector('input[name=q]')
+        const queryInput = document.querySelector('input[name=q], input[type="search"]')
 
         if (window.location.href.includes("https://www.google.com/maps")) {
             const searchInput = document.getElementById("searchboxinput");
