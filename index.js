@@ -55,6 +55,7 @@
     }
 
     function keydownEventHandler (event) {
+        // for alt is evt.altKey
         if (event.metaKey && event.key === 'k') {
             event.preventDefault();
             focusOnSearchInput();
