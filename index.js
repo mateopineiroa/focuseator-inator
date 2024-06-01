@@ -14,20 +14,26 @@
 
     // i want to focus at the end of the content of the input
     function focusElement(htmlElementRef) {
+        console.log('focus', htmlElementRef)
         htmlElementRef.focus()
         const length = htmlElementRef.value.length;
         htmlElementRef.setSelectionRange(length, length);
     }
 
     function focusOnSearchInput() {
-        const inputElement = document.querySelector('input');
+        const inputElement = document.querySelectorAll('input');
+        const queryInput = document.querySelector('input[name=q]')
 
         if (window.location.href.includes("https://www.google.com/maps")) {
             const searchInput = document.getElementById("searchboxinput");
             focusElement(searchInput);
             return
         }
-        if (window.location.origin === "https://www.google.com") {
+        if (queryInput) {
+            focusElement(queryInput)
+            return
+        }
+        if (["https://www.google.com"].includes(window.location.origin)) {
             const googleSearchButton = document.querySelector('textarea[name=q]')
             focusElement(googleSearchButton)
             return
@@ -53,7 +59,7 @@
 
     document.addEventListener('keydown', keydownEventHandler);
     // This is magic to make maps work. The event listener must be on the canvas after you move the map
-    if (window.location.href.includes('https://www.google.com/maps')) {
+    if (window.location.href.includes('https://www.google.com/maps') || window.location.href.includes("https://www.google.com.uy/maps")) {
        setInterval(() => {
            const mapsCanvas = document.querySelector('canvas')
            if (mapsCanvas) {
