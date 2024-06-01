@@ -10,15 +10,18 @@
 
 (function() {
     // 'use strict'; I want to use window
-    console.log('matscript loaded hehe');
+    console.log('focuseator-inator is alive and listening for events :)');
 
     // i want to focus at the end of the content of the input
     function focusElement(htmlElementRef) {
         console.log('focus', htmlElementRef)
         if (!htmlElementRef) return;
         htmlElementRef.focus()
-        const length = htmlElementRef.value.length;
-        htmlElementRef.setSelectionRange(length, length);
+        // setSelectionRange methis is only available for those input/textarea types
+        if (['password', 'search', 'tel', 'text', 'url'].includes(htmlElementRef.type)) {
+            const length = htmlElementRef.value.length;
+            htmlElementRef.setSelectionRange(length, length);
+        }
     }
 
     function focusOnSearchInput() {
