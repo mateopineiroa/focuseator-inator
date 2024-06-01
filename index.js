@@ -15,13 +15,14 @@
     // i want to focus at the end of the content of the input
     function focusElement(htmlElementRef) {
         console.log('focus', htmlElementRef)
+        if (!htmlElementRef) return;
         htmlElementRef.focus()
         const length = htmlElementRef.value.length;
         htmlElementRef.setSelectionRange(length, length);
     }
 
     function focusOnSearchInput() {
-        const inputElement = document.querySelectorAll('input');
+        const inputElement = document.querySelector('input');
         const queryInput = document.querySelector('input[name=q]')
 
         if (window.location.href.includes("https://www.google.com/maps")) {
