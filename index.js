@@ -12,6 +12,7 @@
     // 'use strict'; I want to use window
     console.log('matscript loaded hehe');
 
+    // i want to focus at the end of the content of the input
     function focusElement(htmlElementRef) {
         htmlElementRef.focus()
         const length = htmlElementRef.value.length;
@@ -33,8 +34,10 @@
         }
         if (window.location.origin.includes("netflix")) {
             const searchButton = document.getElementsByClassName('searchTab');
+            if (!searchButton[0]) return;
             return searchButton[0].click()
         }
+        if (inputElement.type === "hidden") return;
         if (inputElement) {
             focusElement(inputElement)
             return
