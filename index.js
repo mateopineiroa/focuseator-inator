@@ -19,7 +19,7 @@
         if (!htmlElementRef) return;
         htmlElementRef.focus()
         // setSelectionRange methis is only available for those input/textarea types
-        if (['password', 'search', 'tel', 'text', 'url'].includes(htmlElementRef.type)) {
+        if (['password', 'search', 'tel', 'text', 'url', 'textarea'].includes(htmlElementRef.type)) {
             const length = htmlElementRef.value.length;
             htmlElementRef.setSelectionRange(length, length);
         }
@@ -34,12 +34,10 @@
             focusElement(searchInput);
             return
         }
-        if (queryInput) {
-            focusElement(queryInput)
-            return
-        }
+
         if (["https://www.google.com"].includes(window.location.origin)) {
             const googleSearchButton = document.querySelector('textarea[name=q]')
+            console.log(googleSearchButton.type)
             focusElement(googleSearchButton)
             return
         }
@@ -47,6 +45,10 @@
             const searchButton = document.getElementsByClassName('searchTab');
             if (!searchButton[0]) return;
             return searchButton[0].click()
+        }
+        if (queryInput) {
+            focusElement(queryInput)
+            return
         }
         if (inputElement.type === "hidden") return;
         if (inputElement) {
