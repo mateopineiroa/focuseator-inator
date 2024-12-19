@@ -4,8 +4,9 @@
 // @version      2023-12-08
 // @description  try to take over the world!
 // @author       You
-// @match        *
+// @match        *://*/*
 // @grant        none
+// @run-at       document-end
 // ==/UserScript==
 
 (function() {
@@ -73,7 +74,6 @@
        }, 1000)// one second seems to be enough
 	}
 })();
-
 
 
 
