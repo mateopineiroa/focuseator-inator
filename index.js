@@ -37,7 +37,11 @@
 
         if (["https://www.google.com"].includes(window.location.origin)) {
             const googleSearchButton = document.querySelector('textarea[name=q]')
-            console.log(googleSearchButton.type)
+            focusElement(googleSearchButton)
+            return
+        }
+        if (["https://www.youtube.com"].includes(window.location.origin)) {
+            const googleSearchButton = document.querySelector('input[name=search_query]')
             focusElement(googleSearchButton)
             return
         }
